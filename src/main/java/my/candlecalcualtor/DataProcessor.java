@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class DataProcessor {
@@ -257,6 +258,7 @@ public class DataProcessor {
     }
 
     private static boolean getResult(List<Integer> massive1, List<Integer> massive2) {
+        Collections.reverse(massive2);
         return massive1.equals(massive2);
     }
 
