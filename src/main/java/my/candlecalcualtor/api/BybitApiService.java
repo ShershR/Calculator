@@ -40,7 +40,7 @@ public class BybitApiService {
 
                 // Обработка JSON
                 JSONObject jsonResponse = new JSONObject(response.toString());
-                System.out.println(response);
+             //   System.out.println(response);
                 JSONArray klineData = jsonResponse.getJSONObject("result").getJSONArray("list");
 
                 for (int i = 0; i < klineData.length(); i++) {

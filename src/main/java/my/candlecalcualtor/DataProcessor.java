@@ -104,7 +104,7 @@ public class DataProcessor {
             throw new IllegalArgumentException("Both Y1 and Y2 must have exactly 5 elements.");
         }
 
-        int[][] matrix = new int[4][4];
+        int[][] matrix = new int[4][6];
 
         int[][] instructions = {
                 // Column 1
@@ -112,24 +112,32 @@ public class DataProcessor {
                 {1, 0}, // 2*1: Y1[1] and Y2[2]
                 {0, 0}, // 3*1: Y1[2] and Y2[2]
                 {1, 1}, // 4*1: Y1[1] and Y2[1]
+                {0, 1}, // 1*1: Y1[2] and Y2[1]
+                {1, 0}, // 2*1: Y1[1] and Y2[2]
 
                 // Column 2
                 {1, 2}, // 1*2: Y1[3] and Y2[2]
                 {2, 1}, // 2*2: Y1[2] and Y2[3]
                 {1, 1}, // 3*2: Y1[3] and Y2[3]
                 {2, 2}, // 4*2: Y1[2] and Y2[2]
+                {1, 2}, // 1*2: Y1[3] and Y2[2]
+                {2, 1}, // 2*2: Y1[2] and Y2[3]
 
                 // Column 3
                 {2, 3}, // 1*3: Y1[4] and Y2[3]
                 {3, 2}, // 2*3: Y1[3] and Y2[4]
                 {2, 2}, // 3*3: Y1[4] and Y2[4]
                 {3, 3}, // 4*3: Y1[3] and Y2[3]
+                {2, 3}, // 1*3: Y1[4] and Y2[3]
+                {3, 2}, // 2*3: Y1[3] and Y2[4]
 
                 // Column 4
                 {3, 4}, // 1*4: Y1[5] and Y2[4]
                 {4, 3}, // 2*4: Y1[4] and Y2[5]
                 {3, 3}, // 3*4: Y1[5] and Y2[5]
-                {4, 4}  // 4*4: Y1[4] and Y2[4]
+                {4, 4},  // 4*4: Y1[4] and Y2[4]
+                {3, 4}, // 1*4: Y1[5] and Y2[4]
+                {4, 3}, // 2*4: Y1[4] and Y2[5]
         };
         int i = 0;
         int j = 0;
@@ -140,7 +148,7 @@ public class DataProcessor {
                     ),
                     j % 2 == 0 ? "+" : "-"); // 1*1
             j++;
-            if (j == 4) {
+            if (j == 6) {
                 j = 0;
                 i++;
             }
@@ -185,15 +193,11 @@ public class DataProcessor {
     }
 
     public static List<Integer> generateMassive4(int[][] table) {
-        if (table.length != 4 || table[0].length != 4) {
-            throw new IllegalArgumentException("Table3 must be a 4x4 matrix.");
-        }
-
         List<Integer> massive4 = new ArrayList<>();
 
         for (int row = 0; row < 4; row++) {
             int sum = 0;
-            for (int col = 0; col < 4; col++) {
+            for (int col = 0; col < 6; col++) {
                 sum += table[row][col];
             }
             massive4.add(sum);
@@ -203,31 +207,39 @@ public class DataProcessor {
     }
 
     public static int[][] generateTable5(List<String> Y1, List<String> Y2) {
-        int[][] table5 = new int[4][4];
+        int[][] table5 = new int[4][6];
         int[][] instructions = {
                 // Column 1
                 {1, 0}, // 1*1: Y1[2] and Y2[1]
                 {0, 1}, // 2*1: Y1[1] and Y2[2]
                 {1, 1}, // 3*1: Y1[2] and Y2[2]
                 {0, 0}, // 4*1: Y1[1] and Y2[1]
+                {1, 0}, // 1*1: Y1[2] and Y2[1]
+                {0, 1}, // 2*1: Y1[1] and Y2[2]
 
                 // Column 2
                 {2, 1}, // 1*2: Y1[3] and Y2[2]
                 {1, 2}, // 2*2: Y1[2] and Y2[3]
                 {2, 2}, // 3*2: Y1[3] and Y2[3]
                 {1, 1}, // 4*2: Y1[2] and Y2[2]
+                {2, 1}, // 1*2: Y1[3] and Y2[2]
+                {1, 2}, // 2*2: Y1[2] and Y2[3]
 
                 // Column 3
                 {3, 2}, // 1*3: Y1[4] and Y2[3]
                 {2, 3}, // 2*3: Y1[3] and Y2[4]
                 {3, 3}, // 3*3: Y1[4] and Y2[4]
                 {2, 2}, // 4*3: Y1[3] and Y2[3]
+                {3, 2}, // 1*3: Y1[4] and Y2[3]
+                {2, 3}, // 2*3: Y1[3] and Y2[4]
 
                 // Column 4
                 {4, 3}, // 1*4: Y1[5] and Y2[4]
                 {3, 4}, // 2*4: Y1[4] and Y2[5]
                 {4, 4}, // 3*4: Y1[5] and Y2[5]
-                {3, 3}  // 4*4: Y1[4] and Y2[4]
+                {3, 3},  // 4*4: Y1[4] and Y2[4]
+                {4, 3}, // 1*4: Y1[5] and Y2[4]
+                {3, 4}, // 2*4: Y1[4] and Y2[5]
         };
 
 
@@ -236,7 +248,7 @@ public class DataProcessor {
         for (int[] pair : instructions) {
             table5[i][j] = countOccurrences(Y1.get(pair[0]), Y2.get(pair[1]), j % 2 == 0 ? "+" : "-"); // 1*1
             j++;
-            if (j == 4) {
+            if (j == 6) {
                 j = 0;
                 i++;
             }
@@ -272,7 +284,7 @@ public class DataProcessor {
         int[][] table3 = generateMatrix(Y1, Y2);
         log("\nТаблица 3:\n", string);
         for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
+            for (int j = 0; j < 6; j++) {
                 log(table3[i][j] + " ", string);
             }
             log("\n", string);
@@ -284,7 +296,7 @@ public class DataProcessor {
         System.out.println();
         int[][] table5 = generateTable5(Y1, Y2);
         for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
+            for (int j = 0; j < 6; j++) {
                 log(table5[i][j] + " ", string);
             }
             log("\n", string);
