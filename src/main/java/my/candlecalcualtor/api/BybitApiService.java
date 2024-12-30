@@ -50,7 +50,8 @@ public class BybitApiService {
                     candles.add(new Candle(open, close));
                 }
             } else {
-                System.out.println("HTTP Error: " + responseCode);
+                System.out.print(" --- HTTP Error: " + responseCode);
+                System.out.print(" Response message: " + conn.getResponseMessage());
             }
         } catch (Exception e) {
             e.printStackTrace();
