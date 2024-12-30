@@ -9,6 +9,13 @@ public class CandleCalculatorBot extends TelegramLongPollingBot {
 
     private DataProcessor dataProcessor;
 
+    private String token;
+
+    public CandleCalculatorBot(String token) {
+        this.token = token;
+        this.dataProcessor = new DataProcessor();
+    }
+
     public CandleCalculatorBot() {
         this.dataProcessor = new DataProcessor();
     }
@@ -20,7 +27,7 @@ public class CandleCalculatorBot extends TelegramLongPollingBot {
 
     @Override
     public String getBotToken() {
-        return "7443985646:AAHTqGsvfdwbk8m8UJBwI4A8YX_cGHKWKdI";
+        return token;
     }
 
     @Override
