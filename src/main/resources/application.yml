@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: serving-web-content
+
+logging:
+  level:
+    org.springframework.boot.autoconfigure.condition.ConditionEvaluationReportLogger: OFF
