@@ -5,7 +5,7 @@ FROM openjdk:17-jdk-slim
 WORKDIR /app
 
 # Копируем скомпилированный JAR-файл в контейнер
-COPY target/trade-1.0-SNAPSHOT.jar app.jar
+COPY target/calculator-1.0.jar app.jar
 
 # Указываем команду для запуска приложения
-CMD ["java", "-jar", "trade-1.0-SNAPSHOT.jar"]
+CMD ["java", "-jar", "app.jar"]
